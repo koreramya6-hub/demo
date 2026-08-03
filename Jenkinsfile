@@ -15,10 +15,16 @@ pipeline {
         }
 
         stage('Build') {
-            steps {
-                sh 'mvn clean install'
-            }
-        }
+    steps {
+        sh '''
+        export JAVA_HOME=/usr/lib/jvm/java-21-openjdk-amd64
+        export PATH=$JAVA_HOME/bin:$PATH
+        java -version
+        javac -version
+        mvn clean install
+        '''
+    }
+}
 
         stage('Deploy') {
             steps {
