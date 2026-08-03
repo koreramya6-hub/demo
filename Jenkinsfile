@@ -1,17 +1,12 @@
 pipeline {
     agent any
 
-    tools {
-        maven 'Maven'
-        jdk 'JDK21'
-    }
-
     stages {
 
-        stage('Git Checkout') {
+        stage('Check Java') {
             steps {
-                git branch: 'main',
-                url: 'https://github.com/koreramya6-hub/demo.git'
+                sh 'java -version'
+                sh 'mvn -version'
             }
         }
 
@@ -21,5 +16,10 @@ pipeline {
             }
         }
 
+        stage('Deploy') {
+            steps {
+                echo 'Deploying application'
+            }
+        }
     }
 }
